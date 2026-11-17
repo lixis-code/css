@@ -1,0 +1,195 @@
+:root {
+    /* Variables réutilisables */
+
+    --bronze: #a8663b;
+    --argent: #8792a0;
+    --or: #d2a52a;
+    --diamant: #48a8c2;
+
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: #2d0470e7;
+    background: linear-gradient(180deg, #2d0470e7, #0f0127);
+    color: #000000;
+    font-family: "Times New Roman", serif;
+    line-height: 1.5;
+}
+
+h2 {
+    color: #d8dff7;
+}
+
+header {
+    padding: 48px 20px;
+    background-color: #b90303da;
+    color: #d8dff7;
+    text-align: center;
+    position: relative;   
+    z-index: 1;           
+}
+
+/* Le fil vert (une succession d'arcs) */
+header::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  pointer-events: none;
+  background: radial-gradient(
+      ellipse 40px 28px at 50% 0,
+      transparent 0 92%,
+      #1b5e20 93% 100%,
+      transparent 100%
+    )
+    0 0 / 80px 40px repeat-x;
+}
+
+/* Les ampoules colorées, qui clignotent doucement */
+header::before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  pointer-events: none;
+  z-index: 1;
+  background:
+    radial-gradient(circle 6px at 40px 32px,  #ffd54f 0 5px, transparent 6px),
+    radial-gradient(circle 6px at 120px 32px, #ff5252 0 5px, transparent 6px),
+    radial-gradient(circle 6px at 200px 32px, #40c4ff 0 5px, transparent 6px),
+    radial-gradient(circle 6px at 280px 32px, #69f0ae 0 5px, transparent 6px);
+  background-size: 320px 40px;
+  background-repeat: repeat-x;
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
+  animation: guirlande-clignote 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes guirlande-clignote {
+  from { opacity: 0.55; }
+  to   { opacity: 1; }
+}
+
+/* Laisse la place à la guirlande avant le contenu suivant */
+header + * {
+  margin-top: 40px;
+}
+
+main {
+    width: 90%;
+    max-width: 1000px;
+    margin: 40px auto;
+}
+
+section {
+    margin-bottom: 40px;
+}
+
+section > div {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+article {
+    overflow: hidden;
+    padding: 16px;
+    background-color: #d8dff7;
+    border: 2px solid #dfe3ec;
+    border-radius: 20px;
+}
+
+article.bronze {
+    border-color: var(--bronze);
+}
+
+article.argent {
+    border-color: var(--argent);
+}
+
+article.or {
+    border-color: var(--or);
+}
+
+article.diamant {
+    border-color: var(--diamant);
+}
+
+article.bloque {
+    background-color: #d8dff7;
+    color: #000000;
+}
+
+article.bloque img {
+    filter: grayscale(70%);
+}
+
+article img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 1px;
+    object-fit: cover;
+}
+
+
+footer {
+    padding: 20px;
+    color: #d8dff7;
+    text-align: center;
+}
+
+
+/* Cartes secrètes : animation glossy */
+article {
+    position: relative;
+}
+
+article.secret > * {
+    position: relative;
+    z-index: 1;
+}
+
+article.secret::after {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    top: -50%;
+    left: -60%;
+    width: 45%;
+    height: 200%;
+    background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.45),
+            transparent
+    );
+    transform: skewX(-20deg);
+    pointer-events: none;
+    animation: reflet 3s ease-in-out infinite;
+}
+
+@keyframes reflet {
+    from {
+        left: -60%;
+    }
+
+    to {
+        left: 120%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    article.secret::after {
+        animation: none;
+    }
+}
+
